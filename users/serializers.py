@@ -25,7 +25,6 @@ class UserUpdateSerializer(serializers.Serializer):
     username = serializers.CharField()
     nickname = serializers.CharField()
     email = serializers.EmailField()
-    password = serializers.CharField()
 
     def save(self, **kwargs):
         user = self.context['user']
@@ -33,7 +32,6 @@ class UserUpdateSerializer(serializers.Serializer):
         if 'username'  in keys: user.username = self.validated_data['username']
         if 'nickname'  in keys: user.nickname = self.validated_data['nickname']
         if 'email'     in keys: user.email    = self.validated_data['email']
-        if 'password'  in keys: user.password = self.validated_data['password']
         user.save()
         return user
 
