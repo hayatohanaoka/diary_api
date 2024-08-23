@@ -4,7 +4,6 @@ from rest_framework.response import Response
 from django.contrib import auth
 from rest_framework.authtoken.models import Token
 
-
 from .models import CustomUser
 from .serializers import UserSerializer, UserRegistSerializer, UserUpdateSerializer, UserLoginSerializer
 
