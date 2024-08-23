@@ -1,8 +1,8 @@
 import requests
 
-res = requests.post('http://127.0.0.1:8000/api/v1/users/login/', data={
-    'email': 'aav@bbb.ccc',
-    'password': '123456789'
-})
-print(res.status_code)
-print(res.content)
+def get_login_token(email, password):
+    res = requests.post('http://127.0.0.1:8000/api/v1/users/login/', data={
+        'email': email,
+        'password': password
+    })
+    return res.json()
