@@ -1,3 +1,8 @@
 from django.urls import path
 
-urlpatterns = []
+from .views import DiaryView, DiaryRegistView
+
+urlpatterns = [
+    path('', DiaryView.as_view(), name='list'),
+    path('write/', DiaryRegistView.as_view(), name='write')
+]
