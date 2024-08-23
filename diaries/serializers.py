@@ -12,7 +12,8 @@ class DiaryRegistSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Diary
-        fields = ('author', 'title', 'content', 'diary_date')
+        fields = ('title', 'content', 'diary_date')
 
     def save(self, **kwargs):
-        Diary.objects.create(**kwargs)
+        diary = Diary.objects.create(author=self.context['author'], **self.validated_data)
+        return diary
