@@ -1,11 +1,6 @@
 import requests
 
-def get_login_token(email, password):
-    res = requests.post('http://127.0.0.1:8000/api/v1/users/login/', data={
-        'email': email,
-        'password': password
-    })
-    return res.json()
+from diary_api.clients.token_login_user import get_login_token
 
 login_token_json = get_login_token('aa@bbb.ccc', '123456789')
 token = login_token_json['token']
