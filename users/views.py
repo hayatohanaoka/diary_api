@@ -25,16 +25,19 @@ class UserView(APIView):
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
+
 class UserProfileView(APIView):
+    
+    query_set = CustomUser.objects.all()
 
     def get(self, req, id):
-        query_set = CustomUser.objects.all()
-        user = get_object_or_404(query_set, id=id)
+        user = get_object_or_404(self.query_set, pk=id)
         serializer = UserSerializer(user)
         return Response(serializer.data)
 
     def patch(self, req, id):
-        if req.user.id == id:
+        user = get_object_or_404(self.query_set, pk=id)
+        if user == req.user:
             serializer = UserUpdateSerializer(data=req.data, context={'user': req.user})
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
@@ -42,11 +45,13 @@ class UserProfileView(APIView):
         return Response(status=400)
     
     def delete(self, req, id):
-        if req.user.id == id:
-            user = CustomUser.objects.filter(pk=id)
+        user = get_object_or_404(self.query_set, pk=id)
+        if user == req.user:
+            user = get_object_or_404(self.query_set, pk=id)
             user.delete()
             return Response(status=204)
         return Response(status=400)
+
 
 class UserTokenLoginView(APIView):
     

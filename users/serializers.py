@@ -7,6 +7,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'nickname')
         read_only_fields = ('id',)
 
+
 class UserRegistSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
@@ -21,11 +22,12 @@ class UserRegistSerializer(serializers.ModelSerializer):
         )
         return user
 
+
 class UserUpdateSerializer(serializers.Serializer):
     username = serializers.CharField()
     nickname = serializers.CharField()
     email = serializers.EmailField()
-
+    
     def save(self, **kwargs):
         user = self.context['user']
         keys = self.validated_data.keys()
@@ -34,6 +36,7 @@ class UserUpdateSerializer(serializers.Serializer):
         if 'email'     in keys: user.email    = self.validated_data['email']
         user.save()
         return user
+
 
 class UserLoginSerializer(serializers.Serializer):
     email = serializers.EmailField()

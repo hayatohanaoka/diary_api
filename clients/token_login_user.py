@@ -5,4 +5,5 @@ def get_login_token(email, password):
         'email': email,
         'password': password
     })
-    return res.json()
+    login_token_json =  res.json()
+    return login_token_json['token']

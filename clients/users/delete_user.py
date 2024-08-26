@@ -1,9 +1,8 @@
 import requests
 
-from token_login_user import get_login_token
+from diary_api.clients.token_login_user import get_login_token
 
-login_token_json = get_login_token('aabb@bbb.ccc', '123456789')
-token = login_token_json['token']
+token = get_login_token('aabb@bbb.ccc', '123456789')
 
 res_1 = requests.delete(
     'http://127.0.0.1:8000/api/v1/users/1/',
